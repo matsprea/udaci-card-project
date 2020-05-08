@@ -1,0 +1,17 @@
+{
+  "name": "udaci-card-project",
+  "displayName": "udaci-card-project",
+  "expo": {
+    "name": "udaci-card-project",
+    "slug": "udaci-card-project",
+    "version": "1.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
