@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
+import { setLocalNotification } from './utils/notification';
+import { store } from './store';
+
+
 export default function App() {
+  useEffect(() => setLocalNotification);
+
   return (
     <View style={styles.container}>
       <Text>Open up App.tsx to start working on your app!</Text>
