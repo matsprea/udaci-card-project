@@ -13,8 +13,11 @@ interface Styles {
   CardText: TextStyle;
 }
 
-const Deck: FunctionComponent<IProps> = ({ deck }) =>
-  deck === undefined ? (
+const Deck: FunctionComponent<IProps> = ({ deck }) => {
+
+  console.log('deck', deck);
+
+  return  deck === undefined ? (
     <View style={styles.View} />
   ) : (
     <View style={styles.View}>
@@ -22,10 +25,11 @@ const Deck: FunctionComponent<IProps> = ({ deck }) =>
         <Text style={styles.DeckText}>{deck.title}</Text>
       </View>
       <View>
-        <Text style={styles.CardText}>{deck.cards.length} cards</Text>
+        <Text style={styles.CardText}>{deck.cards?.length} cards</Text>
       </View>
     </View>
   );
+  }
 
 export default Deck;
 

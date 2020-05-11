@@ -1,11 +1,12 @@
 import React, { useState, FunctionComponent } from 'react';
 import { Text, View, StyleSheet, TextInput, ViewStyle, TextStyle } from 'react-native';
 import TouchButton from './TouchButton';
-import { gray, green, white, textGray } from '../utils/colors';
+import * as colors from '../utils/colors';
 import { useDispatch } from 'react-redux';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from './AppNavigator';
 import { addDeckCreator } from '../store/decks/actions';
+import { IDeck } from '../store/decks/types';
 
 type AddDeckNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -33,14 +34,14 @@ const AddDeck: FunctionComponent<IProps> = ({ navigation }) => {
   };
 
   const handleSubmit = () => {
-    const deck = { title };
+    const deck : IDeck = { title, cards: [] };
     dispatch(addDeckCreator(deck));
     setTitle('');
 
     navigation.reset({
       index: 1,
       routes: [
-        { name: 'Home' },
+        { name: 'DeckList' },
         {
           name: 'DeckDetail',
           params: { deck },
@@ -52,6 +53,7 @@ const AddDeck: FunctionComponent<IProps> = ({ navigation }) => {
 
   return (
     <View style={styles.Container}>
+
       <View style={{ height: 60 }} />
       <View style={styles.Block}>
         <Text style={styles.Title}>What is the title of your new deck?</Text>
@@ -68,7 +70,7 @@ const AddDeck: FunctionComponent<IProps> = ({ navigation }) => {
         />
       </View>
       <TouchButton
-        btnStyle={{ backgroundColor: green, borderColor: white }}
+        btnStyle={{ backgroundColor: colors.green, borderColor: colors.white }}
         onPress={handleSubmit}
         disabled={title === ''}
       >
@@ -85,7 +87,7 @@ const styles = StyleSheet.create<Styles>({
     paddingLeft: 16,
     paddingRight: 16,
     paddingBottom: 16,
-    backgroundColor: gray,
+    backgroundColor: colors.gray,
   },
   Block: {
     marginBottom: 20,
@@ -96,8 +98,8 @@ const styles = StyleSheet.create<Styles>({
   },
   TextInput: {
     borderWidth: 1,
-    borderColor: textGray,
-    backgroundColor: white,
+    borderColor: colors.textGray,
+    backgroundColor: colors.white,
     paddingLeft: 10,
     paddingRight: 10,
     borderRadius: 5,

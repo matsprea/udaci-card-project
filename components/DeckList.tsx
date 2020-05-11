@@ -7,7 +7,7 @@ import {
   ViewStyle,
   TextStyle,
 } from 'react-native';
-import { FunctionComponent } from 'react';
+import React, { FunctionComponent, useEffect } from 'react';
 import { StackNavigationProp } from '@react-navigation/stack';
 
 import { useTypedSelector } from '../store/index';
@@ -16,6 +16,10 @@ import * as colors from '../utils/colors';
 
 import { RootStackParamList } from './AppNavigator';
 import Deck from './Deck';
+import TextButton from './TextButton';
+import TouchButton from './TouchButton';
+import { useDispatch } from 'react-redux';
+import { loadDecksCreator } from '../store/decks/actions';
 
 type DeckListNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -29,26 +33,38 @@ export interface IProps {
 interface Styles {
   ScrollView: ViewStyle;
   Text: TextStyle;
+  NoDecks: TextStyle;
 }
 
 const DeckList: FunctionComponent<IProps> = ({ navigation }) => {
+  const dispatch = useDispatch();
 
-  const decks = useTypedSelector( state  => state.decks.data);
-
+  useEffect(() => {
+    dispatch(loadDecksCreator());
+  }, []);
+  
+  const decks = useTypedSelector((state) => state.decks.data);
+ 
   return (
     <ScrollView style={styles.ScrollView}>
       <Text style={styles.Text}>Mobile Flashcards</Text>
-      {decks.map((deck) => {
-        return (
-          <TouchableOpacity
-            key={deck.title}
-            onPress={() => navigation.push('DeckDetail', { deck })}
-          >
-            <Deck deck={deck} />
-          </TouchableOpacity>
-        );
-      })}
-      <View style={{ marginBottom: 30 }} />
+      {decks.length > 0 ? (
+        decks.map((deck) => {
+          return (
+            <TouchableOpacity
+              key={deck.title}
+              onPress={() => navigation.push('DeckDetail', { deck })}
+            >
+              <Deck deck={deck} />
+            </TouchableOpacity>
+          );
+        })
+      ) : (
+        <Text style={styles.NoDecks}>No Decks available.</Text>
+      )}
+      <TouchButton onPress={() => navigation.push('AddDeck')}>
+        Add Deck
+      </TouchButton>
     </ScrollView>
   );
 };
@@ -68,6 +84,11 @@ const styles = StyleSheet.create<Styles>({
     fontSize: 40,
     textAlign: 'center',
     marginBottom: 16,
-    color: colors.green,
+    color: colors.blue,
+  },
+  NoDecks: {
+    fontSize: 20,
+    textAlign: 'center',
+    marginBottom: 16,
   },
 });

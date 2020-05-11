@@ -42,8 +42,8 @@ const DeckDetail: FunctionComponent<IProps> = ({
   const dispatch = useDispatch();
 
   const handleDelete = (title: string) => {
-    dispatch(removeDeckCreator(title));
     navigation.goBack();
+    dispatch(removeDeckCreator(title));
   };
 
   return (
