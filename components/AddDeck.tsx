@@ -38,7 +38,7 @@ const AddDeck: FunctionComponent<IProps> = ({ navigation }) => {
     const deck : IDeck = { title, cards: [] };
     dispatch(addDeckCreator(deck));
     setTitle('');
-    navigation.replace( 'DeckDetail', { deck })     
+    navigation.replace( 'DeckDetail', { title })     
 
   };
 
