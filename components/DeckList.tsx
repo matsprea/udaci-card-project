@@ -63,7 +63,7 @@ const DeckList: FunctionComponent<IProps> = ({ navigation }) => {
         <Text style={styles.NoDecks}>No Decks available.</Text>
       )}
       <TouchButton onPress={() => navigation.push('AddDeck')}>
-        Add Deck
+        Create Deck
       </TouchButton>
     </ScrollView>
   );

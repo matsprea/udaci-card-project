@@ -47,7 +47,7 @@ const AppNavigator = () => {
           <Stack.Screen
             name="AddDeck"
             component={AddDeck}
-            options={{ title: 'Add Deck' }}
+            options={{ title: 'Create Deck' }}
           />
           <Stack.Screen
             name="DeckDetail"
