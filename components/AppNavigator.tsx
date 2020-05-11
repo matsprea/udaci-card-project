@@ -11,6 +11,7 @@ import DeckList from './DeckList';
 import AddDeck from './AddDeck';
 import AddCard from './AddCard';
 import DeckDetail from './DeckDetail';
+import Quiz from './Quiz';
 
 const Stack = createStackNavigator();
 
@@ -58,10 +59,15 @@ const AppNavigator = () => {
             component={AddCard}
             options={{ title: 'Add Card' }}
           />
-          {/* <Stack.Screen name="Quiz" component={Quiz} /> */}
+          <Stack.Screen
+            name="Quiz"
+            component={Quiz}
+            options={({ route }) => ({ title: `Quiz: ${ route.params.deck.title}` })}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     );
 };
 
 export default AppNavigator;
+ 

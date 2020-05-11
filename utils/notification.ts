@@ -51,6 +51,9 @@ export const setLocalNotification = () => {
             });
             AsyncStorage.setItem(NOTIFICATION_KEY, JSON.stringify(true));
           })
+          .catch((err) => {
+            console.log(`Error in setting the notification: ${err}`)
+          })
       }
     });
   });

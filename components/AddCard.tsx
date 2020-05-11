@@ -29,7 +29,6 @@ interface Styles {
   Title: TextStyle;
 }
 
-
 const AddCard: FunctionComponent<IProps> = ({ route, navigation }) => {
 
   const { title } = route.params;

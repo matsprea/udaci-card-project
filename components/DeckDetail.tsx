@@ -16,7 +16,6 @@ import Deck from './Deck';
 import TextButton from './TextButton';
 import TouchButton from './TouchButton';
 
-
 type DeckDetailsNavigationProp = StackNavigationProp<
   RootStackParamList,
   'DeckDetail'
@@ -47,7 +46,6 @@ const DeckDetail: FunctionComponent<IProps> = ({ route, navigation }) => {
     dispatch(removeDeckCreator(title));
   };
 
-  navigation;
   return (
     <View style={styles.View}>
       <Deck deck={deck} />
