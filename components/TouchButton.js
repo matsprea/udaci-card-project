@@ -1,32 +1,8 @@
-import React, { FunctionComponent } from 'react';
-import {
-  Text,
-  View,
-  TouchableOpacity,
-  StyleSheet,
-  ViewStyle,
-  TextStyle,
-  GestureResponderEvent,
-} from 'react-native';
+import React from 'react';
+import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
 import * as colors from '../utils/colors';
 
-interface IProps {
-  children: React.ReactNode;
-  onPress: (event: GestureResponderEvent) => void;
-  btnStyle?: ViewStyle;
-  txtStyle?: TextStyle;
-  disabled?: boolean;
-}
-
-interface Styles {
-  btnContainer: ViewStyle;
-  btn: ViewStyle;
-  btnDisabled: ViewStyle;
-  btnText: TextStyle;
-  btnTextDisabled: TextStyle;
-}
-
-const TouchButton: FunctionComponent<IProps> = ({
+const TouchButton = ({
   children,
   onPress,
   btnStyle = {},
@@ -53,7 +29,7 @@ const TouchButton: FunctionComponent<IProps> = ({
 
 export default TouchButton;
 
-const styles = StyleSheet.create<Styles>({
+const styles = StyleSheet.create({
   btnContainer: {
     alignItems: 'center',
     marginBottom: 20,

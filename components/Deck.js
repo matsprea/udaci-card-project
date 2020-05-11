@@ -1,21 +1,10 @@
-import React, { FunctionComponent } from 'react';
-import { View, Text, StyleSheet, TextStyle, ViewStyle } from 'react-native';
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
 
 import * as colors from '../utils/colors';
-import { IDeck } from '../store/decks/types';
 
-interface IProps {
-  deck: IDeck;
-}
-
-interface Styles {
-  View: ViewStyle;
-  DeckText: TextStyle;
-  CardText: TextStyle;
-}
-
-const Deck: FunctionComponent<IProps> = ({ deck }) => {
-  return  deck === undefined ? (
+const Deck = ({ deck }) => {
+  return deck === undefined ? (
     <View style={styles.View} />
   ) : (
     <View style={styles.View}>
@@ -27,11 +16,11 @@ const Deck: FunctionComponent<IProps> = ({ deck }) => {
       </View>
     </View>
   );
-  }
+};
 
 export default Deck;
 
-const styles = StyleSheet.create<Styles>({
+const styles = StyleSheet.create({
   View: {
     alignItems: 'center',
     justifyContent: 'center',

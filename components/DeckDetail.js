@@ -1,47 +1,26 @@
-import React, { FunctionComponent } from 'react';
-import { View, StyleSheet, ViewStyle } from 'react-native';
+import React from 'react';
+import { View, StyleSheet } from 'react-native';
 import { useDispatch } from 'react-redux';
-import { RouteProp } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
 
 import * as colors from '../utils/colors';
 
 import { removeDeckCreator } from '../store/decks/actions';
 import { useTypedSelector } from '../store';
-import { IDeck } from '../store/decks/types';
-
-import { RootStackParamList } from './AppNavigator';
 
 import Deck from './Deck';
 import TextButton from './TextButton';
 import TouchButton from './TouchButton';
 
-type DeckDetailsNavigationProp = StackNavigationProp<
-  RootStackParamList,
-  'DeckDetail'
->;
-
-type DeckDetailsRouteProp = RouteProp<RootStackParamList, 'DeckDetail'>;
-
-interface IProps {
-  route: DeckDetailsRouteProp;
-  navigation: DeckDetailsNavigationProp;
-}
-
-interface Styles {
-  View: ViewStyle;
-}
-
-const DeckDetail: FunctionComponent<IProps> = ({ route, navigation }) => {
+const DeckDetail = ({ route, navigation }) => {
   const { title } = route.params;
 
   const deck = useTypedSelector((state) =>
     state.decks.data.find((deck) => deck.title === title)
-  ) as IDeck;
+  );
 
   const dispatch = useDispatch();
 
-  const handleDelete = (title: string) => {
+  const handleDelete = (title) => {
     navigation.goBack();
     dispatch(removeDeckCreator(title));
   };
@@ -72,7 +51,7 @@ const DeckDetail: FunctionComponent<IProps> = ({ route, navigation }) => {
 
 export default DeckDetail;
 
-const styles = StyleSheet.create<Styles>({
+const styles = StyleSheet.create({
   View: {
     flex: 1,
     justifyContent: 'space-around',

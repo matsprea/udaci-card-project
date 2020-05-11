@@ -1,46 +1,25 @@
+import React from 'react';
 import {
   StyleSheet,
   Text,
   ScrollView,
   TouchableOpacity,
-  ViewStyle,
-  TextStyle,
   View,
   ActivityIndicator,
 } from 'react-native';
-import React, { FunctionComponent } from 'react';
-import { StackNavigationProp } from '@react-navigation/stack';
 
 import { useTypedSelector } from '../store/index';
 import * as colors from '../utils/colors';
-import { RootStackParamList } from './AppNavigator';
 
 import Deck from './Deck';
 import TouchButton from './TouchButton';
 
-type DeckListNavigationProp = StackNavigationProp<
-  RootStackParamList,
-  'DeckList'
->;
-
-export interface IProps {
-  navigation: DeckListNavigationProp;
-}
-
-interface Styles {
-  View: ViewStyle;
-  Text: TextStyle;
-  NoDecks: TextStyle;
-}
-
-const DeckList: FunctionComponent<IProps> = ({ navigation }) => {
-  
+const DeckList = ({ navigation }) => {
   const { data, loading } = useTypedSelector((state) => state.decks);
   const decks = data;
 
   return loading ? (
     <View style={[styles.View]}>
- 
       <ActivityIndicator size="large" color={colors.blue} />
     </View>
   ) : (
@@ -71,7 +50,7 @@ const DeckList: FunctionComponent<IProps> = ({ navigation }) => {
 
 export default DeckList;
 
-const styles = StyleSheet.create<Styles>({
+const styles = StyleSheet.create({
   View: {
     flex: 1,
     paddingTop: 16,

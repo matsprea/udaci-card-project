@@ -1,12 +1,6 @@
-import React from 'react'
-import { View, Text, ViewStyle, TextStyle, StyleSheet } from 'react-native';
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
 import * as colors from '../utils/colors';
-
-interface Styles {
-  pageStyle: ViewStyle;
-  block: ViewStyle;
-  count: TextStyle;
-}
 
 const NoCardsQuiz = () => (
   <View style={styles.pageStyle}>
@@ -21,7 +15,7 @@ const NoCardsQuiz = () => (
 
 export default NoCardsQuiz;
 
-const styles = StyleSheet.create<Styles>({
+const styles = StyleSheet.create({
   pageStyle: {
     flex: 1,
     paddingTop: 16,

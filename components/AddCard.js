@@ -10,26 +10,8 @@ import { addCartToDeckCreator } from '../store/decks/actions';
 
 import TouchButton from './TouchButton';
 
-type AddCardNavigationProp = StackNavigationProp<
-  RootStackParamList,
-  'AddCard'
->;
 
-type AddCardRouteProp = RouteProp<RootStackParamList, 'AddCard'>;
-
-export interface IProps {
-  route: AddCardRouteProp;
-  navigation: AddCardNavigationProp;
-}
-
-interface Styles {
-  Container: ViewStyle;
-  Block: ViewStyle;
-  TextInput: TextStyle;
-  Title: TextStyle;
-}
-
-const AddCard: FunctionComponent<IProps> = ({ route, navigation }) => {
+const AddCard = ({ route, navigation }) => {
 
   const { title } = route.params;
 
@@ -90,7 +72,7 @@ const AddCard: FunctionComponent<IProps> = ({ route, navigation }) => {
   );
 };
 
-const styles = StyleSheet.create<Styles>({
+const styles = StyleSheet.create({
   Container: {
     flex: 1,
     paddingTop: 16,

@@ -3,7 +3,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useDispatch } from 'react-redux';
 
-import { IDeck } from '../store/decks/types';
 import * as colors from '../utils/colors';
 import { loadDecksCreator } from '../store/decks/actions';
 
@@ -14,14 +13,6 @@ import DeckDetail from './DeckDetail';
 import Quiz from './Quiz';
 
 const Stack = createStackNavigator();
-
-export type RootStackParamList = {
-  DeckList: undefined;
-  DeckDetail: { title: string };
-  AddDeck: undefined;
-  AddCard: { title: string };
-  Quiz: { deck: IDeck };
-};
 
 const AppNavigator = () => {
       const dispatch = useDispatch();

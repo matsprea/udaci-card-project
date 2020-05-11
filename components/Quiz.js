@@ -1,7 +1,5 @@
-import React, { FunctionComponent, useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TextStyle, ViewStyle } from 'react-native';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { RouteProp } from '@react-navigation/native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
 import ViewPager from '@react-native-community/viewpager';
 
 import {
@@ -9,46 +7,25 @@ import {
   setLocalNotification,
 } from '../utils/notification';
 import * as colors from '../utils/colors';
-import { ICard } from '../store/decks/types';
-import { RootStackParamList } from './AppNavigator';
 
 import NoCardsQuiz from './NoCardsQuiz';
 import QuizResult from './QuizResult';
 import TouchButton from './TouchButton';
 import TextButton from './TextButton';
 
-type QuizNavigationProp = StackNavigationProp<RootStackParamList, 'Quiz'>;
-
-type QuizRouteProp = RouteProp<RootStackParamList, 'Quiz'>;
-
-interface IProps {
-  route: QuizRouteProp;
-  navigation: QuizNavigationProp;
+export const Answer = {
+  CORRECT: 'correct',
+  INCORRECT: 'incorrect',
 }
 
-export enum Answer {
-  CORRECT = 'correct',
-  INCORRECT = 'incorrect',
-}
-
-interface Styles {
-  block: ViewStyle;
-  container: ViewStyle;
-  count: TextStyle;
-  pageStyle: ViewStyle;
-  questionContainer: ViewStyle;
-  questionText: TextStyle;
-  title: TextStyle;
-}
-
-const Quiz: FunctionComponent<IProps> = ({ route, navigation }) => {
+const Quiz = ({ route, navigation }) => {
   const { cards } = route.params.deck;
   const questionCount = cards.length;
 
   const [correctCount, setCorrectCount] = useState(0);
   const [incorrectCount, setIncorrectCount] = useState(0);
   const [answered, setAnswered] = useState(
-    Array<boolean>(questionCount).fill(false)
+    Array(questionCount).fill(false)
   );
 
   const [showQuestion, setShowQuestion] = useState(true);
@@ -61,7 +38,7 @@ const Quiz: FunctionComponent<IProps> = ({ route, navigation }) => {
       });
   }, []);
 
-  const handleAnswer = (response: Answer, reponseIdx: number) => {
+  const handleAnswer = (response, reponseIdx) => {
     if (response === Answer.CORRECT) {
       setCorrectCount(correctCount + 1);
     } else {
@@ -73,7 +50,7 @@ const Quiz: FunctionComponent<IProps> = ({ route, navigation }) => {
   const handleReset = () => {
     setCorrectCount(0);
     setIncorrectCount(0);
-    setAnswered(Array<boolean>(questionCount).fill(false));
+    setAnswered(Array(questionCount).fill(false));
   };
 
   if (questionCount === 0) {
@@ -91,7 +68,7 @@ const Quiz: FunctionComponent<IProps> = ({ route, navigation }) => {
     );
   }
 
-  const renderPage = (card: ICard, idx: number) => {
+  const renderPage = (card, idx) => {
     return (
       <View style={styles.pageStyle} key={idx} collapsable={false}>
         <View style={styles.block}>
@@ -158,7 +135,7 @@ const Quiz: FunctionComponent<IProps> = ({ route, navigation }) => {
 
 export default Quiz;
 
-const styles = StyleSheet.create<Styles>({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
   },

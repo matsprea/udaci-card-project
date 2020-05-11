@@ -1,50 +1,29 @@
-import React, { useState, FunctionComponent } from 'react';
-import { Text, View, StyleSheet, TextInput, ViewStyle, TextStyle } from 'react-native';
+import React, { useState } from 'react';
+import { Text, View, StyleSheet, TextInput } from 'react-native';
 import { useDispatch } from 'react-redux';
-import { StackNavigationProp } from '@react-navigation/stack';
 
 import TouchButton from './TouchButton';
 import * as colors from '../utils/colors';
-import { RootStackParamList } from './AppNavigator';
 import { addDeckCreator } from '../store/decks/actions';
-import { IDeck } from '../store/decks/types';
 
-type AddDeckNavigationProp = StackNavigationProp<
-  RootStackParamList,
-  'AddDeck'
->;
-
-export interface IProps {
-  navigation: AddDeckNavigationProp;
-}
-
-interface Styles {
-  Container: ViewStyle;
-  Block: ViewStyle;
-  TextInput: TextStyle;
-  Title: TextStyle;
-}
-
-const AddDeck: FunctionComponent<IProps> = ({ navigation }) => {
+const AddDeck = ({ navigation }) => {
   const [title, setTitle] = useState('');
 
   const dispatch = useDispatch();
 
-  const handleChange = (text: string) => {
+  const handleChange = (text) => {
     setTitle(text);
   };
 
   const handleSubmit = () => {
-    const deck : IDeck = { title, cards: [] };
+    const deck = { title, cards: [] };
     dispatch(addDeckCreator(deck));
     setTitle('');
-    navigation.replace( 'DeckDetail', { title })     
-
+    navigation.replace('DeckDetail', { title });
   };
 
   return (
     <View style={styles.Container}>
-
       <View style={{ height: 60 }} />
       <View style={styles.Block}>
         <Text style={styles.Title}>What is the title of your new deck?</Text>
@@ -60,17 +39,14 @@ const AddDeck: FunctionComponent<IProps> = ({ navigation }) => {
           onSubmitEditing={handleSubmit}
         />
       </View>
-      <TouchButton
-        onPress={handleSubmit}
-        disabled={title === ''}
-      >
+      <TouchButton onPress={handleSubmit} disabled={title === ''}>
         Create Deck
       </TouchButton>
     </View>
   );
 };
 
-const styles = StyleSheet.create<Styles>({
+const styles = StyleSheet.create({
   Container: {
     flex: 1,
     paddingTop: 16,

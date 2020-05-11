@@ -1,36 +1,11 @@
-import { View, Text, ViewStyle, TextStyle, StyleSheet } from 'react-native';
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+
 import * as colors from '../utils/colors';
+
 import TouchButton from './TouchButton';
-import React, { FunctionComponent } from 'react';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackParamList } from './AppNavigator';
 
-interface Styles {
-  pageStyle: ViewStyle;
-  block: ViewStyle;
-  count: TextStyle;
-  resultTextGood: TextStyle;
-  resultTextBad: TextStyle;
-}
-
-type QuizNavigationProp = StackNavigationProp<
-  RootStackParamList,
-  'Quiz'
->;
-
-interface IProps {
-  correct: number;
-  questionCount: number;
-  handleReset: () => void;
-  navigation: QuizNavigationProp
-}
-
-const QuizResult: FunctionComponent<IProps> = ({
-  correct,
-  questionCount,
-  handleReset,
-  navigation,
-}) => {
+const QuizResult = ({ correct, questionCount, handleReset, navigation }) => {
   const percent = (correct / questionCount) * 100;
   const resultStyle =
     percent >= 70 ? styles.resultTextGood : styles.resultTextBad;
@@ -62,7 +37,6 @@ const QuizResult: FunctionComponent<IProps> = ({
           Restart Quiz
         </TouchButton>
         <TouchButton
-
           onPress={() => {
             handleReset();
             navigation.goBack();
@@ -77,7 +51,7 @@ const QuizResult: FunctionComponent<IProps> = ({
 
 export default QuizResult;
 
-const styles = StyleSheet.create<Styles>({
+const styles = StyleSheet.create({
   pageStyle: {
     flex: 1,
     paddingTop: 16,
