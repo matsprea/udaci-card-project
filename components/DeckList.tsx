@@ -5,6 +5,8 @@ import {
   TouchableOpacity,
   ViewStyle,
   TextStyle,
+  View,
+  ActivityIndicator,
 } from 'react-native';
 import React, { FunctionComponent } from 'react';
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -26,24 +28,32 @@ export interface IProps {
 }
 
 interface Styles {
-  ScrollView: ViewStyle;
+  View: ViewStyle;
   Text: TextStyle;
   NoDecks: TextStyle;
 }
 
 const DeckList: FunctionComponent<IProps> = ({ navigation }) => {
   
-  const decks = useTypedSelector((state) => state.decks.data);
+  const { data, loading } = useTypedSelector((state) => state.decks);
+  const decks = data;
+
+  return loading ? (
+    <View style={[styles.View]}>
  
-  return (
-    <ScrollView style={styles.ScrollView}>
+      <ActivityIndicator size="large" color={colors.blue} />
+    </View>
+  ) : (
+    <ScrollView style={styles.View}>
       <Text style={styles.Text}>Mobile Flashcards</Text>
       {decks.length > 0 ? (
         decks.map((deck) => {
           return (
             <TouchableOpacity
               key={deck.title}
-              onPress={() => navigation.push('DeckDetail', { title: deck.title } )}
+              onPress={() =>
+                navigation.push('DeckDetail', { title: deck.title })
+              }
             >
               <Deck deck={deck} />
             </TouchableOpacity>
@@ -62,7 +72,7 @@ const DeckList: FunctionComponent<IProps> = ({ navigation }) => {
 export default DeckList;
 
 const styles = StyleSheet.create<Styles>({
-  ScrollView: {
+  View: {
     flex: 1,
     paddingTop: 16,
     paddingLeft: 16,

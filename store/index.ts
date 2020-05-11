@@ -7,7 +7,6 @@ import { useSelector, TypedUseSelectorHook } from 'react-redux';
 import { decksReducer } from './decks/reducers';
 import { IDecksState } from './decks/types';
 
-
 export interface IAppState {
   decks: IDecksState;
 }
