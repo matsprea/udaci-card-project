@@ -1,26 +1,21 @@
 import React, { FunctionComponent } from 'react';
-import {
-  View,
-  StyleSheet,
-  ViewStyle,
-  
-} from 'react-native';
-import { white, textGray } from '../utils/colors';
-
-import { RootStackParamList } from './AppNavigator';
+import { View, StyleSheet, ViewStyle } from 'react-native';
+import { useDispatch } from 'react-redux';
+import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 
 import * as colors from '../utils/colors';
 
-import { useDispatch } from 'react-redux';
-import Deck from './Deck';
-import TextButton from './TextButton';
-
 import { removeDeckCreator } from '../store/decks/actions';
-import TouchButton from './TouchButton';
-import { RouteProp } from '@react-navigation/native';
 import { useTypedSelector } from '../store';
 import { IDeck } from '../store/decks/types';
+
+import { RootStackParamList } from './AppNavigator';
+
+import Deck from './Deck';
+import TextButton from './TextButton';
+import TouchButton from './TouchButton';
+
 
 type DeckDetailsNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -38,14 +33,12 @@ interface Styles {
   View: ViewStyle;
 }
 
-const DeckDetail: FunctionComponent<IProps> = ({
-  route,
-  navigation,
-}) => {
-
+const DeckDetail: FunctionComponent<IProps> = ({ route, navigation }) => {
   const { title } = route.params;
 
-  const deck = useTypedSelector((state) => state.decks.data.find( deck => deck.title === title)) as IDeck;
+  const deck = useTypedSelector((state) =>
+    state.decks.data.find((deck) => deck.title === title)
+  ) as IDeck;
 
   const dispatch = useDispatch();
 
@@ -54,21 +47,16 @@ const DeckDetail: FunctionComponent<IProps> = ({
     dispatch(removeDeckCreator(title));
   };
 
-  navigation
+  navigation;
   return (
     <View style={styles.View}>
       <Deck deck={deck} />
       <View>
-        <TouchButton
-          btnStyle={{ backgroundColor: white, borderColor: textGray }}
-          txtStyle={{ color: textGray }}
-          onPress={() => navigation.navigate('AddCard', { title })}
-        >
+        <TouchButton onPress={() => navigation.navigate('AddCard', { title })}>
           Add Card
         </TouchButton>
         <TouchButton
-          btnStyle={{ backgroundColor: colors.green, borderColor: white }}
-          txtStyle={{ color: white }}
+          btnStyle={{ backgroundColor: colors.orange }}
           onPress={() => navigation.navigate('Quiz', { deck })}
         >
           Start Quiz

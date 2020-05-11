@@ -1,12 +1,14 @@
 import React, { FunctionComponent, useState } from 'react';
 import { Text, View, TextInput, StyleSheet, ViewStyle, TextStyle } from 'react-native';
-import TouchButton from './TouchButton';
-import { gray, green } from '../utils/colors';
 import { useDispatch } from 'react-redux';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { RouteProp } from '@react-navigation/native';
+
+import * as colors from '../utils/colors';
 import { RootStackParamList } from './AppNavigator';
 import { addCartToDeckCreator } from '../store/decks/actions';
-import { RouteProp } from '@react-navigation/native';
+
+import TouchButton from './TouchButton';
 
 type AddCardNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -25,7 +27,6 @@ interface Styles {
   Block: ViewStyle;
   TextInput: TextStyle;
   Title: TextStyle;
-  btnStyle: ViewStyle;
 }
 
 
@@ -79,11 +80,10 @@ const AddCard: FunctionComponent<IProps> = ({ route, navigation }) => {
           />
         </View>
         <TouchButton
-          btnStyle={styles.btnStyle}
           onPress={handleSubmit}
           disabled={question === '' || answer === ''}
         >
-          Submit
+          Create Card
         </TouchButton>
       </View>
       <View style={{ height: '30%' }} />
@@ -98,7 +98,7 @@ const styles = StyleSheet.create<Styles>({
     paddingLeft: 16,
     paddingRight: 16,
     paddingBottom: 16,
-    backgroundColor: gray,
+    backgroundColor: colors.gray,
     justifyContent: 'space-around',
   },
   Block: {
@@ -117,11 +117,7 @@ const styles = StyleSheet.create<Styles>({
     borderRadius: 5,
     fontSize: 20,
     height: 40,
-  },
-  btnStyle: {
-    backgroundColor: green,
-    borderColor: '#fff',
-  },
+  }
 });
 
 

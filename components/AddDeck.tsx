@@ -61,7 +61,6 @@ const AddDeck: FunctionComponent<IProps> = ({ navigation }) => {
         />
       </View>
       <TouchButton
-        btnStyle={{ backgroundColor: colors.green, borderColor: colors.white }}
         onPress={handleSubmit}
         disabled={title === ''}
       >

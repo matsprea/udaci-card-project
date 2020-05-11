@@ -1,25 +1,20 @@
 import {
   StyleSheet,
-  View,
   Text,
   ScrollView,
   TouchableOpacity,
   ViewStyle,
   TextStyle,
 } from 'react-native';
-import React, { FunctionComponent, useEffect } from 'react';
+import React, { FunctionComponent } from 'react';
 import { StackNavigationProp } from '@react-navigation/stack';
 
 import { useTypedSelector } from '../store/index';
-
 import * as colors from '../utils/colors';
-
 import { RootStackParamList } from './AppNavigator';
+
 import Deck from './Deck';
-import TextButton from './TextButton';
 import TouchButton from './TouchButton';
-import { useDispatch } from 'react-redux';
-import { loadDecksCreator } from '../store/decks/actions';
 
 type DeckListNavigationProp = StackNavigationProp<
   RootStackParamList,

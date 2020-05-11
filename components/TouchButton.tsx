@@ -8,7 +8,7 @@ import {
   TextStyle,
   GestureResponderEvent,
 } from 'react-native';
-import { white, darkGray, gray } from '../utils/colors';
+import * as colors from '../utils/colors';
 
 interface IProps {
   children: React.ReactNode;
@@ -61,7 +61,7 @@ const styles = StyleSheet.create<Styles>({
   btn: {
     width: 200,
     height: 50,
-    backgroundColor: 'red',
+    backgroundColor: colors.blue,
     borderRadius: 5,
     justifyContent: `center`,
     alignItems: `center`,
@@ -69,15 +69,15 @@ const styles = StyleSheet.create<Styles>({
     borderColor: '#999',
   },
   btnDisabled: {
-    backgroundColor: gray,
-    borderColor: darkGray,
+    backgroundColor: colors.gray,
+    borderColor: colors.darkGray,
   },
   btnText: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: white,
+    color: colors.white,
   },
   btnTextDisabled: {
-    color: darkGray,
+    color: colors.darkGray,
   },
 });

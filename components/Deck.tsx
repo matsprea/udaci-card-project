@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { View, Text, StyleSheet, TextStyle, ViewStyle } from 'react-native';
-import { white, textGray } from '../utils/colors';
+
+import * as colors from '../utils/colors';
 import { IDeck } from '../store/decks/types';
 
 interface IProps {
@@ -38,7 +39,7 @@ const styles = StyleSheet.create<Styles>({
     minHeight: 120,
     borderWidth: 1,
     borderColor: '#aaa',
-    backgroundColor: white,
+    backgroundColor: colors.white,
     borderRadius: 5,
     marginBottom: 10,
   },
@@ -47,6 +48,6 @@ const styles = StyleSheet.create<Styles>({
   },
   CardText: {
     fontSize: 18,
-    color: textGray,
+    color: colors.textGray,
   },
 });

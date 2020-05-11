@@ -1,16 +1,16 @@
 import React, { useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { useDispatch } from 'react-redux';
 
 import { IDeck } from '../store/decks/types';
 import * as colors from '../utils/colors';
+import { loadDecksCreator } from '../store/decks/actions';
 
 import DeckList from './DeckList';
 import AddDeck from './AddDeck';
 import AddCard from './AddCard';
 import DeckDetail from './DeckDetail';
-import { useDispatch } from 'react-redux';
-import { loadDecksCreator } from '../store/decks/actions';
 
 const Stack = createStackNavigator();
 
