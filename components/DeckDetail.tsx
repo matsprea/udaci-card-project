@@ -6,7 +6,6 @@ import {
   
 } from 'react-native';
 import { white, textGray } from '../utils/colors';
-import { IDeck } from '../store/decks/types';
 
 import { RootStackParamList } from './AppNavigator';
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -19,14 +18,19 @@ import TextButton from './TextButton';
 
 import { removeDeckCreator } from '../store/decks/actions';
 import TouchButton from './TouchButton';
+import { RouteProp } from '@react-navigation/native';
+import { useTypedSelector } from '../store';
+import { IDeck } from '../store/decks/types';
 
 type DeckDetailsNavigationProp = StackNavigationProp<
   RootStackParamList,
   'DeckDetail'
 >;
 
+type DeckDetailsRouteProp = RouteProp<RootStackParamList, 'DeckDetail'>;
+
 interface IProps {
-  deck: IDeck;
+  route: DeckDetailsRouteProp;
   navigation: DeckDetailsNavigationProp;
 }
 
@@ -35,9 +39,13 @@ interface Styles {
 }
 
 const DeckDetail: FunctionComponent<IProps> = ({
-  deck,
+  route,
   navigation,
 }) => {
+
+  const { title } = route.params;
+
+  const deck = useTypedSelector((state) => state.decks.data.find( deck => deck.title === title)) as IDeck;
 
   const dispatch = useDispatch();
 
@@ -46,6 +54,7 @@ const DeckDetail: FunctionComponent<IProps> = ({
     dispatch(removeDeckCreator(title));
   };
 
+  navigation
   return (
     <View style={styles.View}>
       <Deck deck={deck} />
@@ -53,7 +62,7 @@ const DeckDetail: FunctionComponent<IProps> = ({
         <TouchButton
           btnStyle={{ backgroundColor: white, borderColor: textGray }}
           txtStyle={{ color: textGray }}
-          onPress={() => navigation.navigate('AddCard', { deck })}
+          onPress={() => navigation.navigate('AddCard', { title })}
         >
           Add Card
         </TouchButton>

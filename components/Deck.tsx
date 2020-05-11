@@ -14,9 +14,6 @@ interface Styles {
 }
 
 const Deck: FunctionComponent<IProps> = ({ deck }) => {
-
-  console.log('deck', deck);
-
   return  deck === undefined ? (
     <View style={styles.View} />
   ) : (

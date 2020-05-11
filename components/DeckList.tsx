@@ -37,11 +37,6 @@ interface Styles {
 }
 
 const DeckList: FunctionComponent<IProps> = ({ navigation }) => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(loadDecksCreator());
-  }, []);
   
   const decks = useTypedSelector((state) => state.decks.data);
  
@@ -53,7 +48,7 @@ const DeckList: FunctionComponent<IProps> = ({ navigation }) => {
           return (
             <TouchableOpacity
               key={deck.title}
-              onPress={() => navigation.push('DeckDetail', { deck })}
+              onPress={() => navigation.push('DeckDetail', { title: deck.title } )}
             >
               <Deck deck={deck} />
             </TouchableOpacity>

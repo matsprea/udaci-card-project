@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -9,18 +9,26 @@ import DeckList from './DeckList';
 import AddDeck from './AddDeck';
 import AddCard from './AddCard';
 import DeckDetail from './DeckDetail';
+import { useDispatch } from 'react-redux';
+import { loadDecksCreator } from '../store/decks/actions';
 
 const Stack = createStackNavigator();
 
 export type RootStackParamList = {
   DeckList: undefined;
-  DeckDetail: { deck: IDeck };
+  DeckDetail: { title: string };
   AddDeck: undefined;
-  AddCard: { deck: IDeck };
+  AddCard: { title: string };
   Quiz: { deck: IDeck };
 };
 
 const AppNavigator = () => {
+      const dispatch = useDispatch();
+
+      useEffect(() => {
+        dispatch(loadDecksCreator());
+      }, []);
+    
     return (
       <NavigationContainer>
         <Stack.Navigator

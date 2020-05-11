@@ -1,9 +1,10 @@
 import React, { useState, FunctionComponent } from 'react';
 import { Text, View, StyleSheet, TextInput, ViewStyle, TextStyle } from 'react-native';
-import TouchButton from './TouchButton';
-import * as colors from '../utils/colors';
 import { useDispatch } from 'react-redux';
 import { StackNavigationProp } from '@react-navigation/stack';
+
+import TouchButton from './TouchButton';
+import * as colors from '../utils/colors';
 import { RootStackParamList } from './AppNavigator';
 import { addDeckCreator } from '../store/decks/actions';
 import { IDeck } from '../store/decks/types';
@@ -37,17 +38,7 @@ const AddDeck: FunctionComponent<IProps> = ({ navigation }) => {
     const deck : IDeck = { title, cards: [] };
     dispatch(addDeckCreator(deck));
     setTitle('');
-
-    navigation.reset({
-      index: 1,
-      routes: [
-        { name: 'DeckList' },
-        {
-          name: 'DeckDetail',
-          params: { deck },
-        },
-      ],
-    });
+    navigation.replace( 'DeckDetail', { deck })     
 
   };
 

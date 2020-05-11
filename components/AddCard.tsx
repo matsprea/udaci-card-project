@@ -6,14 +6,17 @@ import { useDispatch } from 'react-redux';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from './AppNavigator';
 import { addCartToDeckCreator } from '../store/decks/actions';
+import { RouteProp } from '@react-navigation/native';
 
 type AddCardNavigationProp = StackNavigationProp<
   RootStackParamList,
   'AddCard'
 >;
 
+type AddCardRouteProp = RouteProp<RootStackParamList, 'AddCard'>;
+
 export interface IProps {
-  title: string;
+  route: AddCardRouteProp;
   navigation: AddCardNavigationProp;
 }
 
@@ -26,7 +29,10 @@ interface Styles {
 }
 
 
-const AddCard: FunctionComponent<IProps> = ({ title, navigation }) => {
+const AddCard: FunctionComponent<IProps> = ({ route, navigation }) => {
+
+  const { title } = route.params;
+
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState('');
   const dispatch = useDispatch();

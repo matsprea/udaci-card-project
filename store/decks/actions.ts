@@ -53,6 +53,7 @@ export const loadDecksCreator: ActionCreator<ThunkAction<
   null,
   ILoadDecks
 >> = () => async (dispatch: Dispatch) => {
+  dispatch(loadingDecksAction());
   const data = await getAllDecks();
   return dispatch(loadDecksAction(data));
 };
@@ -83,7 +84,6 @@ export const addCartToDeckCreator: ActionCreator<ThunkAction<
   { title: string; card: ICard },
   IAddCartToDeck
 >> = (title: string, card: ICard) => async (dispatch: Dispatch) => {
-  dispatch(loadingDecksAction());
   await addCardToDeck(title, card);
   return dispatch(addCartToDeckAction(title, card));
 };
